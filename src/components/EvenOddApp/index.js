@@ -1,38 +1,39 @@
-import  { Component } from 'react';
-import './index.css';
+import {Component} from 'react'
+
+import './index.css'
 
 class EvenOddApp extends Component {
-  state = {
-    count: 0,
-  };
+  state = {count: 0}
 
-  incrementCount = () => {
-    const randomIncrement = Math.floor(Math.random() * 101); // Generate random number between 0 to 100
-    this.setState(prevState => ({
-      count: prevState.count + randomIncrement,
-    }));
-  };
+  getRandomNumber = () => Math.ceil(Math.random() * 100)
+
+  onIncrement = () => {
+    const randomNumber = this.getRandomNumber()
+
+    this.setState(prevState => ({count: prevState.count + randomNumber}))
+  }
 
   render() {
-    const { count } = this.state;
-    const isEven = count % 2 === 0;
+    const {count} = this.state
+    const displayText = count % 2 === 0 ? 'Even' : 'Odd'
 
     return (
-      <div className="even-odd-container">
-        <h1 className="heading">Count {count}</h1>
+      <div className="app-container">
         <div className="count-container">
-          {isEven ? (
-            <p className="even-odd-text even">Count is Even</p>
-          ) : (
-            <p className="even-odd-text odd">Count is Odd</p>
-          )}
+          <h1 className="count">Count {count}</h1>
+          <p className="number-category">Count is {displayText}</p>
+          <button
+            type="button"
+            className="increment-button"
+            onClick={this.onIncrement}
+          >
+            Increment
+          </button>
+          <p className="note">*Increase By Random Number Between 0 to 100</p>
         </div>
-        <button className="increment-button" onClick={this.incrementCount} type="button">
-          Increment
-        </button>
       </div>
-    );
+    )
   }
 }
 
-export default EvenOddApp;
+export default EvenOddApp
